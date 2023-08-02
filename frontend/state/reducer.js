@@ -6,11 +6,8 @@ const initialWheelState = 0
 function wheel(state = initialWheelState, action) {
   switch(action.type){
     case MOVE_CLOCKWISE:
-      console.log('Trying to Move Clockwise')
-      return {
-        ...state,
-        
-      }
+      if (state === 5) return 0;
+        return state + 1;
     default:
       return state;
   }

@@ -3,6 +3,7 @@ import { MOVE_CLOCKWISE } from "./action-types"
 
 // ❗ You don't need to add extra action creators to achieve MVP
 export function moveClockwise() { 
+  console.log("trying to move clockwise")
   return ({type: MOVE_CLOCKWISE})
 }
 
