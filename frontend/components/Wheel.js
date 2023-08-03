@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 
 import { moveClockwise } from '../state/action-creators';
 
-export default function Wheel(props) {
-  console.log(props)
+export function Wheel(props) {
+  console.log('my props', props)
   return (
     <div id="wrapper">
       <div id="wheel">
-        <div className={`cog ${props.state === 0 ? 'active' : ''}`} style={{ "--i": 0 }}>B</div>
-        <div className="cog" style={{ "--i": 1 }}></div>
-        <div className="cog" style={{ "--i": 2 }}></div>
-        <div className="cog" style={{ "--i": 3 }}></div>
-        <div className="cog" style={{ "--i": 4 }}></div>
-        <div className="cog" style={{ "--i": 5 }}></div>{/* --i is a custom CSS property, no need to touch that nor the style object */}
+        <div className={`cog ${props.wheelIdx === 0 ? 'active' : ''}`} style={{ "--i": 0 }}>{`${props.wheelIdx === 0 ? 'B' : ''}`}</div>
+        <div className={`cog ${props.wheelIdx === 1 ? 'active' : ''}`} style={{ "--i": 1 }}>{`${props.wheelIdx === 1 ? 'B' : ''}`}</div>
+        <div className={`cog ${props.wheelIdx === 2 ? 'active' : ''}`} style={{ "--i": 2 }}>{`${props.wheelIdx === 2 ? 'B' : ''}`}</div>
+        <div className={`cog ${props.wheelIdx === 3 ? 'active' : ''}`} style={{ "--i": 3 }}>{`${props.wheelIdx === 3 ? 'B' : ''}`}</div>
+        <div className={`cog ${props.wheelIdx === 4 ? 'active' : ''}`} style={{ "--i": 4 }}>{`${props.wheelIdx === 4 ? 'B' : ''}`}</div>
+        <div className={`cog ${props.wheelIdx === 5 ? 'active' : ''}`} style={{ "--i": 5 }}>{`${props.wheelIdx === 5 ? 'B' : ''}`}</div>
       </div>
       <div id="keypad">
         <button id="counterClockwiseBtn" >Counter clockwise</button>
@@ -26,8 +26,8 @@ export default function Wheel(props) {
 const mapStateToProps = (state) => {
   console.log("the state", state);
   return({
-    null: null
+    wheelIdx: state.wheel
   });
 }
 
- connect(mapStateToProps, { moveClockwise })(Wheel);
+ export default connect(mapStateToProps, { moveClockwise })(Wheel);
