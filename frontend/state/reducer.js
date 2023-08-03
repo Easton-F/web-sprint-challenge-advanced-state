@@ -4,9 +4,12 @@ import { MOVE_CLOCKWISE } from './action-types';
 
 const initialWheelState = 0
 function wheel(state = initialWheelState, action) {
+  console.log('wheel reducer state', state)
   switch(action.type){
     case MOVE_CLOCKWISE:
-      if (state === 5) {return 0};
+      if (state === 6) {
+        return 0 
+      };
         return state + 1;
     default:
       return state;
