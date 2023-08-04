@@ -1,4 +1,4 @@
-import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE } from "./action-types"
+import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_SELECTED_ANSWER } from "./action-types"
 
 
 // ❗ You don't need to add extra action creators to achieve MVP
@@ -13,7 +13,11 @@ export function moveCounterClockwise() {
   return({type: MOVE_COUNTERCLOCKWISE});
 }
 
-export function selectAnswer() { }
+export function selectAnswer(answer) {
+  console.log('trying to select')
+  console.log(answer)
+  return ({type: SET_SELECTED_ANSWER, payload: answer});
+ }
 
 export function setMessage() { }
 

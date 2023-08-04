@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
+import { selectAnswer } from '../state/action-creators';
+
 import axios from 'axios';
 
 export function Quiz(props) {
@@ -14,17 +16,17 @@ export function Quiz(props) {
             <h2>What is a closure?</h2>
 
             <div id="quizAnswers">
-              <div className={`answer ${props.selectedAnswer === props.selectedAnswer ? 'selected' : ''}`}>
+              <div className={`answer ${selectedAnswer === 0 ? 'selected' : ''}`}>
                 A function
-                <button>
-                  {`${props.selectedAnswer === props.selectedAnswer ? 'SELECTED' : 'Select'}`}
+                <button onClick={()=> selectAnswer(0)}>
+                  {`${selectedAnswer === 0 ? 'SELECTED' : 'Select'}`}
                 </button>
               </div>
 
-              <div className={`answer ${props.selectedAnswer === props.selectedAnswer ? 'selected' : ''}`}>
+              <div className={`answer ${selectedAnswer === 1 ? 'selected' : ''}`}>
                 An elephant
-                <button>
-                {`${props.selectedAnswer === 0 ? 'SELECTED' : 'Select'}`}
+                <button onClick={()=> selectAnswer(1)}>
+                {`${selectedAnswer === 1 ? 'SELECTED' : 'Select'}`}
                 </button>
               </div>
             </div>
@@ -38,11 +40,11 @@ export function Quiz(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('quiz state', state)
+  console.log('quiz state', state.selectedAnswer)
   return({
     selectedAnswer: state.selectedAnswer
   });
 }
 
 
-export default connect(mapStateToProps)(Quiz);
+export default connect(mapStateToProps, { selectAnswer })(Quiz);
