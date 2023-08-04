@@ -1,6 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux';
 
-export default function Quiz(props) {
+import axios from 'axios';
+
+export function Quiz(props) {
+  console.log("quiz props", props)
   return (
     <div id="wrapper">
       {
@@ -10,17 +14,17 @@ export default function Quiz(props) {
             <h2>What is a closure?</h2>
 
             <div id="quizAnswers">
-              <div className="answer selected">
+              <div className={`answer ${props.selectedAnswer === props.selectedAnswer ? 'selected' : ''}`}>
                 A function
                 <button>
-                  SELECTED
+                  {`${props.selectedAnswer === props.selectedAnswer ? 'SELECTED' : 'Select'}`}
                 </button>
               </div>
 
-              <div className="answer">
+              <div className={`answer ${props.selectedAnswer === props.selectedAnswer ? 'selected' : ''}`}>
                 An elephant
                 <button>
-                  Select
+                {`${props.selectedAnswer === 0 ? 'SELECTED' : 'Select'}`}
                 </button>
               </div>
             </div>
@@ -32,3 +36,13 @@ export default function Quiz(props) {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  console.log('quiz state', state)
+  return({
+    selectedAnswer: state.selectedAnswer
+  });
+}
+
+
+export default connect(mapStateToProps)(Quiz);
