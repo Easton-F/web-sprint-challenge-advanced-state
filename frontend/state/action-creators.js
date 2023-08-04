@@ -1,4 +1,4 @@
-import { MOVE_CLOCKWISE } from "./action-types"
+import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE } from "./action-types"
 
 
 // ❗ You don't need to add extra action creators to achieve MVP
@@ -8,7 +8,10 @@ export function moveClockwise() {
   return ({type: MOVE_CLOCKWISE})
 }
 
-export function moveCounterClockwise() { }
+export function moveCounterClockwise() { 
+  console.log("trying to move Counter clockwise")
+  return({type: MOVE_COUNTERCLOCKWISE});
+}
 
 export function selectAnswer() { }
 

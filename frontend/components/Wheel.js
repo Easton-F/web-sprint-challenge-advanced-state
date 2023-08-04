@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-import reducer, { initialWheelState } from '../state/reducer';
-
-import { moveClockwise } from '../state/action-creators';
+import { moveClockwise, moveCounterClockwise } from '../state/action-creators';
 
 export function Wheel(props) {
   console.log('my props', props)
@@ -18,8 +16,8 @@ export function Wheel(props) {
         <div className={`cog ${props.wheelIdx === 5 ? 'active' : ''}`} style={{ "--i": 5 }}>{`${props.wheelIdx === 5 ? 'B' : ''}`}</div>
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn" >Counter clockwise</button>
-        <button onClick={moveClockwise} id="clockwiseBtn">Clockwise</button>
+        <button onClick={props.moveCounterClockwise} id="counterClockwiseBtn" >Counter clockwise</button>
+        <button onClick={props.moveClockwise} id="clockwiseBtn">Clockwise</button>
       </div>
     </div>
   )
@@ -32,4 +30,4 @@ const mapStateToProps = (state) => {
   });
 }
 
- export default connect(mapStateToProps, { moveClockwise })(Wheel);
+ export default connect(mapStateToProps, { moveClockwise, moveCounterClockwise })(Wheel);
