@@ -7,8 +7,8 @@ function wheel(state = initialWheelState, action) {
   console.log('wheel reducer state', state)
   switch(action.type){
     case MOVE_CLOCKWISE:
-      if (state === 6) {
-        return 0 
+      if (state === 5) {
+        return state = 0 
       };
         return state + 1;
     default:

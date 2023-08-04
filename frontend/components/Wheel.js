@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-import { moveClockwise } from '../state/action-creators';
+import reducer, { initialWheelState } from '../state/reducer';
 
-const handleClockwiseBtn = () => {
-  moveClockwise();
-}
+import { moveClockwise } from '../state/action-creators';
 
 export function Wheel(props) {
   console.log('my props', props)
@@ -21,7 +19,7 @@ export function Wheel(props) {
       </div>
       <div id="keypad">
         <button id="counterClockwiseBtn" >Counter clockwise</button>
-        <button onClick={handleClockwiseBtn} id="clockwiseBtn">Clockwise</button>
+        <button onClick={moveClockwise} id="clockwiseBtn">Clockwise</button>
       </div>
     </div>
   )
