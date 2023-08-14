@@ -41,11 +41,7 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   console.log('answer state', state)
   switch(action.type){
     case SET_SELECTED_ANSWER:
-      if (action.payload === 0){
-        return state = 0
-      }else if (action.payload === 1){
-        return state = 1
-      }
+      return state = action.payload
     default:
       return state
   }

@@ -15,7 +15,7 @@ export function moveCounterClockwise() {
 
 export function selectAnswer(answer) {
   console.log('trying to select')
-  console.log(answer)
+  console.log('answer', answer)
   return ({type: SET_SELECTED_ANSWER, payload: answer});
  }
 
