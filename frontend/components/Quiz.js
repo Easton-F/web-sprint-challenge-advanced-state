@@ -7,6 +7,7 @@ import axios from 'axios';
 
 export function Quiz(props) {
   console.log("quiz props", props)
+  console.log('selected answer', props.selectedAnswer)
   return (
     <div id="wrapper">
       {
@@ -16,17 +17,17 @@ export function Quiz(props) {
             <h2>What is a closure?</h2>
 
             <div id="quizAnswers">
-              <div className={`answer ${selectedAnswer === 0 ? 'selected' : ''}`}>
+              <div className={`answer ${props.selectedAnswer === 0 ? 'selected' : ''}`}>
                 A function
                 <button onClick={()=> selectAnswer(0)}>
-                  {`${selectedAnswer === 0 ? 'SELECTED' : 'Select'}`}
+                  {`${props.selectedAnswer === 0 ? 'SELECTED' : 'Select'}`}
                 </button>
               </div>
 
-              <div className={`answer ${selectedAnswer === 1 ? 'selected' : ''}`}>
+              <div className={`answer ${props.selectedAnswer === 1 ? 'selected' : ''}`}>
                 An elephant
                 <button onClick={()=> selectAnswer(1)}>
-                {`${selectedAnswer === 1 ? 'SELECTED' : 'Select'}`}
+                {`${props.selectedAnswer === 1 ? 'SELECTED' : 'Select'}`}
                 </button>
               </div>
             </div>

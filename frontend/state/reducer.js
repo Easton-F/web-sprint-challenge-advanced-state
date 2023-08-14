@@ -38,9 +38,14 @@ function quiz(state = initialQuizState, action) {
 
 const initialSelectedAnswerState = null
 function selectedAnswer(state = initialSelectedAnswerState, action) {
+  console.log('answer state', state)
   switch(action.type){
     case SET_SELECTED_ANSWER:
-      return action.payload
+      if (action.payload === 0){
+        return state = 0
+      }else if (action.payload === 1){
+        return state = 1
+      }
     default:
       return state
   }
