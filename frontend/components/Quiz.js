@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-import { selectAnswer } from '../state/action-creators';
+import { selectAnswer, fetchQuiz } from '../state/action-creators';
 
 import axios from 'axios';
 
@@ -41,9 +41,10 @@ export function Quiz(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('quiz state', state.selectedAnswer)
+  console.log('quiz state', state)
   return({
-    selectedAnswer: state.selectedAnswer
+    selectedAnswer: state.selectedAnswer,
+  
   });
 }
 
