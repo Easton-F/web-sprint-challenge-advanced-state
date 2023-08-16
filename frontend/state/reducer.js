@@ -7,7 +7,6 @@ import { fetchQuiz } from './action-creators';
 
 export const initialWheelState = 0
 function wheel(state = initialWheelState, action) {
-  console.log('wheel reducer state', state)
   switch(action.type){
     case MOVE_CLOCKWISE:
       if (state === 5) {
@@ -31,7 +30,7 @@ function quiz(state = initialQuizState, action) {
   console.log('quiz reducer state', state)
   switch(action.type){
     case SET_QUIZ_INTO_STATE:
-      
+      return state = action.payload
     default:
       return state;
   }
@@ -39,7 +38,6 @@ function quiz(state = initialQuizState, action) {
 
 const initialSelectedAnswerState = null
 function selectedAnswer(state = initialSelectedAnswerState, action) {
-  console.log('answer state', state)
   switch(action.type){
     case SET_SELECTED_ANSWER:
       return state = action.payload

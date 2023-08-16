@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 
-import { selectAnswer, fetchQuiz } from '../state/action-creators';
-
-import axios from 'axios';
+import { fetchQuiz, selectAnswer } from '../state/action-creators';
 
 export function Quiz(props) {
   console.log("quiz props", props)
   console.log('selected answer', props.selectedAnswer)
+
+  useEffect(()=> {
+    if (props.quizState === null){
+      fetchQuiz();
+    }
+  });
+
+  console.log('quiz data', props.quizState)
+
   return (
     <div id="wrapper">
       {
@@ -44,9 +51,9 @@ const mapStateToProps = (state) => {
   console.log('quiz state', state)
   return({
     selectedAnswer: state.selectedAnswer,
-  
+    quizState: state.quiz
   });
 }
 
 
-export default connect(mapStateToProps, { selectAnswer })(Quiz);
+export default connect(mapStateToProps, { selectAnswer, fetchQuiz })(Quiz);

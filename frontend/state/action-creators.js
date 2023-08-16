@@ -3,27 +3,22 @@ import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_QUIZ_INTO_STATE, SET_SELECTE
 import axios from "axios"
 
 // ❗ You don't need to add extra action creators to achieve MVP
-export function moveClockwise() { 
-  console.log("trying to move clockwise")
-  console.log({type: MOVE_CLOCKWISE})
+export function moveClockwise() {
   return ({type: MOVE_CLOCKWISE})
 }
 
 export function moveCounterClockwise() { 
-  console.log("trying to move Counter clockwise")
   return({type: MOVE_COUNTERCLOCKWISE});
 }
 
 export function selectAnswer(answer) {
-  console.log('trying to select')
-  console.log('answer', answer)
   return ({type: SET_SELECTED_ANSWER, payload: answer});
  }
 
 export function setMessage() { }
 
-export function setQuiz() { 
-  return ({type: SET_QUIZ_INTO_STATE});
+export function setQuiz(quizData) { 
+  return ({type: SET_QUIZ_INTO_STATE, payload: quizData});
 }
 
 export function inputChange() { }
@@ -34,21 +29,18 @@ export function resetForm() { }
 export function fetchQuiz() {
   return function (dispatch) {
     dispatch({
-      type: 'RESET_THE_QUIZ',
-      payload: 'Loading next quiz...'
+      type: SET_QUIZ_INTO_STATE,
+      payload: null
     })
     axios.get('http://localhost:9000/api/quiz/next')
       .then(res => {
         dispatch({
-          type: 'FETCH_QUIZ_SUCCESS',
+          type: SET_QUIZ_INTO_STATE,
           payload: res.data
         })
       })
       .catch(err => {
-        dispatch({
-          type: 'FETCH_QUIZ_FAIL',
-          payload: err.message
-        })
+        console.log(err)
       })
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
