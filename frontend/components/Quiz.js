@@ -5,15 +5,16 @@ import { fetchQuiz, selectAnswer } from '../state/action-creators';
 
 export function Quiz(props) {
   console.log("quiz props", props)
-  console.log('selected answer', props.selectedAnswer)
 
   useEffect(()=> {
-    if (props.quizState === null){
-      fetchQuiz();
+    console.log('fetching quiz')
+    if (props.quiz === null){
+      console.log('test', props.quiz)
+      props.fetchQuiz();
     }
-  });
+  }, []);
 
-  console.log('quiz data', props.quizState)
+  console.log('quiz data', props.quiz)
 
   return (
     <div id="wrapper">
@@ -21,7 +22,7 @@ export function Quiz(props) {
         // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
         true ? (
           <>
-            <h2>What is a closure?</h2>
+            {/* <h2>{props.quiz.question}</h2> */}
 
             <div id="quizAnswers">
               <div className={`answer ${props.selectedAnswer === 0 ? 'selected' : ''}`}>
@@ -51,7 +52,7 @@ const mapStateToProps = (state) => {
   console.log('quiz state', state)
   return({
     selectedAnswer: state.selectedAnswer,
-    quizState: state.quiz
+    quiz: state.quiz
   });
 }
 

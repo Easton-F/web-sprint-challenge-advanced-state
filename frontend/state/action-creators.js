@@ -34,6 +34,8 @@ export function fetchQuiz() {
     })
     axios.get('http://localhost:9000/api/quiz/next')
       .then(res => {
+        console.log('res data', res.data)
+        console.log('res question:', res.data.question)
         dispatch({
           type: SET_QUIZ_INTO_STATE,
           payload: res.data
