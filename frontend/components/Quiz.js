@@ -16,24 +16,28 @@ export function Quiz(props) {
 
   console.log('quiz data', props.quiz)
 
+  const onSubmit = () => {
+    
+  }
+
   return (
     <div id="wrapper">
       {
         // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
         true ? (
           <>
-            {/* <h2>{props.quiz.question}</h2> */}
+            <h2>{props.quiz?.question}</h2>
 
             <div id="quizAnswers">
               <div className={`answer ${props.selectedAnswer === 0 ? 'selected' : ''}`}>
-                A function
+                {props.quiz?.answers?.[0]?.text}
                 <button onClick={()=> selectAnswer(0)}>
                   {`${props.selectedAnswer === 0 ? 'SELECTED' : 'Select'}`}
                 </button>
               </div>
 
               <div className={`answer ${props.selectedAnswer === 1 ? 'selected' : ''}`}>
-                An elephant
+                {props.quiz?.answers?.[1]?.text}
                 <button onClick={()=> selectAnswer(1)}>
                 {`${props.selectedAnswer === 1 ? 'SELECTED' : 'Select'}`}
                 </button>
