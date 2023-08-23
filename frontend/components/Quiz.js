@@ -1,50 +1,41 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 
-import { fetchQuiz, selectAnswer } from '../state/action-creators';
+import { fetchQuiz, selectAnswer, setMessage, setQuiz, postAnswer } from '../state/action-creators';
 
 export function Quiz(props) {
-  console.log("quiz props", props)
 
   useEffect(()=> {
-    console.log('fetching quiz')
     if (props.quiz === null){
       console.log('test', props.quiz)
       props.fetchQuiz();
     }
   }, []);
 
-  console.log('quiz data', props.quiz)
 
-  const onSubmit = () => {
-    
+  const onSubmit = (e) => {
+    props.postAnswer(props.selectedAnswer, props.quiz.quiz_id);
+    e.preventDefault();
   }
 
   return (
     <div id="wrapper">
       {
         // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
-        true ? (
+        props.quiz ? (
           <>
             <h2>{props.quiz?.question}</h2>
 
             <div id="quizAnswers">
-              <div className={`answer ${props.selectedAnswer === 0 ? 'selected' : ''}`}>
-                {props.quiz?.answers?.[0]?.text}
-                <button onClick={()=> selectAnswer(0)}>
-                  {`${props.selectedAnswer === 0 ? 'SELECTED' : 'Select'}`}
+              {props.quiz.answers.map(value => <div className={`answer ${props.selectedAnswer === value.answer_id ? 'selected' : ''}`}>
+                {value.text}
+                <button onClick={()=> props.selectAnswer(value.answer_id)}>
+                  {`${props.selectedAnswer === value.answer_id ? 'SELECTED' : 'Select'}`}
                 </button>
-              </div>
-
-              <div className={`answer ${props.selectedAnswer === 1 ? 'selected' : ''}`}>
-                {props.quiz?.answers?.[1]?.text}
-                <button onClick={()=> selectAnswer(1)}>
-                {`${props.selectedAnswer === 1 ? 'SELECTED' : 'Select'}`}
-                </button>
-              </div>
+              </div>)}
             </div>
 
-            <button id="submitAnswerBtn">Submit answer</button>
+            <button disabled={props.selectedAnswer === null} onClick={onSubmit} id="submitAnswerBtn">Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
@@ -53,12 +44,12 @@ export function Quiz(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('quiz state', state)
   return({
     selectedAnswer: state.selectedAnswer,
-    quiz: state.quiz
+    quiz: state.quiz,
+    message: state.infoMessage
   });
 }
 
 
-export default connect(mapStateToProps, { selectAnswer, fetchQuiz })(Quiz);
+export default connect(mapStateToProps, { selectAnswer, fetchQuiz, setMessage, setQuiz, postAnswer })(Quiz);

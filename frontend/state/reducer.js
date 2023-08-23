@@ -1,6 +1,6 @@
 // ❗ You don't need to add extra reducers to achieve MVP
 import { combineReducers } from 'redux'
-import { MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, SET_QUIZ_INTO_STATE, SET_SELECTED_ANSWER } from './action-types';
+import { INPUT_CHANGE, MOVE_CLOCKWISE, MOVE_COUNTERCLOCKWISE, RESET_FORM, SET_INFO_MESSAGE, SET_QUIZ_INTO_STATE, SET_SELECTED_ANSWER } from './action-types';
 
 
 
@@ -9,17 +9,9 @@ export const initialWheelState = 0
 function wheel(state = initialWheelState, action) {
   switch(action.type){
     case MOVE_CLOCKWISE:
-      if (state === 5) {
-        return state = 0 
-      }else {
-        return state + 1;
-      }
+      return (state + 1) % 6
     case MOVE_COUNTERCLOCKWISE:
-      if (state === 0) {
-        return state = 5
-      }else {
-        return state - 1;
-      }
+      return state === 0 ? 5 : state - 1
     default:
       return state;
   }
@@ -29,7 +21,7 @@ const initialQuizState = null
 function quiz(state = initialQuizState, action) {
   switch(action.type){
     case SET_QUIZ_INTO_STATE:
-      return state = action.payload
+      return action.payload
     default:
       return state;
   }
@@ -39,7 +31,7 @@ const initialSelectedAnswerState = null
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch(action.type){
     case SET_SELECTED_ANSWER:
-      return state = action.payload
+      return action.payload
     default:
       return state
   }
@@ -47,7 +39,12 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
 
 const initialMessageState = ''
 function infoMessage(state = initialMessageState, action) {
-  return state
+  switch(action.type){
+    case SET_INFO_MESSAGE:
+      return action.payload
+    default:
+      return state
+  }
 }
 
 const initialFormState = {
@@ -56,7 +53,17 @@ const initialFormState = {
   newFalseAnswer: '',
 }
 function form(state = initialFormState, action) {
-  return state
+  switch(action.type){
+    case INPUT_CHANGE:
+      return {
+        ...state,
+        [action.payload.id]: action.payload.value
+      }
+    case RESET_FORM:
+      return initialFormState
+  default:
+    return state
+  }
 }
 
 export default combineReducers({ wheel, quiz, selectedAnswer, infoMessage, form })
